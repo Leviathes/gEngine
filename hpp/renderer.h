@@ -20,6 +20,7 @@ public:
 	camera view;
 
 	SDL_Renderer* get();
+    TTF_Font* fontFPS{nullptr};
 	bool set(SDL_Renderer* source);
 
 	void showFrames(const double& frames);
