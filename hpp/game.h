@@ -1,0 +1,43 @@
+//
+// Created by lucas on 9/11/21.
+//
+
+#ifndef ADVETUREGAME_GAME_H
+#define ADVETUREGAME_GAME_H
+#include "common.h"
+#include "textureAtlas.h"
+#include "engine.h"
+#include "player.h"
+
+
+//class engine;
+
+class game : public engine {
+	SDL_Event* event;
+	scene* currentScene;
+
+public:
+player p1;
+
+
+
+	game();
+	~game();
+	void run();
+	void handleEvents();
+	void loop();
+
+	void keyDown(const SDL_KeyboardEvent& e);
+	void keyUp(const  SDL_KeyboardEvent& e);
+
+	void mouseDown(const SDL_MouseButtonEvent& e);
+	void mouseUp(const SDL_MouseButtonEvent& e);
+
+
+
+
+
+};
+
+
+#endif //ADVETUREGAME_GAME_H
