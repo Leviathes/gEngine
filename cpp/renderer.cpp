@@ -28,7 +28,7 @@ void renderer::showFrames(const double& frames) {
 		string output{"FPS: "};
 		output += std::to_string((Uint32)frames);
 
-		TTF_Font* fontFPS = TTF_OpenFont(getDir("Pixer-Regular.ttf").c_str(), 16);
+		fontFPS = TTF_OpenFont(getDir("Pixer-Regular.ttf").c_str(), 16);
 		SDL_Color textColor{0,0,0,0};
 		SDL_Surface* textSurface = TTF_RenderText_Solid( fontFPS, output.c_str(), textColor);
 		SDL_Texture* fpsTexture = SDL_CreateTextureFromSurface(Renderer, textSurface);
