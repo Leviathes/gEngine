@@ -20,9 +20,9 @@ namespace toolBox {
 				return "";
 			}
 			size_t pos = baseRes.rfind("bin");
-			std::cout << baseRes << std::endl;
-			baseRes = baseRes.substr(0, pos) + "assets" + PATH_STEP;
 
+			baseRes = baseRes.substr(0, pos) + "assets" + PATH_STEP;
+            std::cout << baseRes << std::endl;
 		}
 		return dir.empty() ? baseRes : baseRes + dir;
 	}
