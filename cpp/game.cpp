@@ -23,7 +23,7 @@ void game::run() {
 	currentScene->fillGUI();
 	currentScene->fillBlocks("scene_data.txt");
 	currentScene->entities[scene::people].emplace_back(player);
-	currentScene->addPeopleRandom({1000000});
+	currentScene->addPeopleRandom({10000});
 	dbm(std::to_string(currentScene->entities[scene::people].size()));
 	dbm("running...");
 	dbm("DEBUGGING ON");
