@@ -5,8 +5,8 @@
 #ifndef ADVETUREGAME_SCENE_H
 #define ADVETUREGAME_SCENE_H
 #include "entity.h"
-#include "fileReader.h"
-#include "GUI.h"
+#include "../../FileReader/hpp/fileReader.h"
+#include "../../System/hpp/GUI.h"
 
 
 

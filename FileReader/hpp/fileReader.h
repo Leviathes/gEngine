@@ -4,7 +4,7 @@
 
 #ifndef ADVENTUREGAME_FILEREADER_H
 #define ADVENTUREGAME_FILEREADER_H
-#include "common.h"
+#include "../../System/hpp/common.h"
 #include <fstream>
 #include <sstream>
 

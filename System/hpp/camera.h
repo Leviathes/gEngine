@@ -6,7 +6,7 @@
 #define ADVENTUREGAME_CAMERA_H
 #include "vd2d.h"
 #include "SDL.h"
-#include "player.h"
+#include "../../Game/hpp/player.h"
 
 class camera {
 public:

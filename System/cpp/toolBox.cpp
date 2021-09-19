@@ -1,7 +1,7 @@
 //
 // Created by lucas on 9/13/21.
 //
-#include "../hpp/game.h"
+#include "../../Game/hpp/game.h"
 #include "../hpp/toolBox.h"
 
 

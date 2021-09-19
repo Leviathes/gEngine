@@ -3,7 +3,7 @@
 //
 
 
-#include "../hpp/fileReader.h"
+#include "hpp/fileReader.h"
 
 
 vector<vector<vd2d>> fileReader::vectorFill(const string& file) {

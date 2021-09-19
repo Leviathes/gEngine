@@ -4,9 +4,9 @@
 
 #ifndef ADVETUREGAME_GAME_H
 #define ADVETUREGAME_GAME_H
-#include "common.h"
-#include "textureAtlas.h"
-#include "engine.h"
+#include "../../System/hpp/common.h"
+#include "../../System/hpp/engine.h"
+#include "../../System/hpp/textureAtlas.h"
 #include "player.h"
 
 

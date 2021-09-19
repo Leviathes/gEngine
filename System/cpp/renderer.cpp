@@ -3,7 +3,7 @@
 //
 
 #include "../hpp/renderer.h"
-#include "../hpp/game.h"
+#include "../../Game/hpp/game.h"
 
 renderer::renderer() {
 	err("TEST");

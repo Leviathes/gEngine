@@ -5,9 +5,9 @@
 #ifndef ADVETUREGAME_RENDERER_H
 #define ADVETUREGAME_RENDERER_H
 #include "common.h"
-#include "scene.h"
+#include "../../Game/hpp/scene.h"
 #include "textureAtlas.h"
-#include "fileReader.h"
+#include "../../FileReader/hpp/fileReader.h"
 #include "camera.h"
 class renderer {
 	SDL_Renderer* Renderer;

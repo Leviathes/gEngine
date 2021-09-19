@@ -12,26 +12,26 @@ find_package(SDL2TTF REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2TTF_INCLUDE_DIRS})
 
 add_executable(AdventureGame
-        cpp/main.cpp
-        hpp/common.h
-        hpp/toolBox.h cpp/toolBox.cpp
-        hpp/engine.h cpp/engine.cpp
-        hpp/game.h cpp/game.cpp
+        Game/cpp/main.cpp
+        System/hpp/common.h
+        System/hpp/toolBox.h System/cpp/toolBox.cpp
+        System/hpp/engine.h System/cpp/engine.cpp
+        Game/hpp/game.h Game/cpp/game.cpp
 
-        hpp/entity.h cpp/entity.cpp
+        Game/hpp/entity.h Game/cpp/entity.cpp
 
-        hpp/vd2d.h cpp/vd2d.cpp
+        System/hpp/vd2d.h System/cpp/vd2d.cpp
 
-        hpp/renderer.h cpp/renderer.cpp
+        System/hpp/renderer.h System/cpp/renderer.cpp
 
-        hpp/sprite.h cpp/sprite.cpp
+        Game/hpp/sprite.h Game/cpp/sprite.cpp
 
-        hpp/textureAtlas.h cpp/textureAtlas.cpp
+        System/hpp/textureAtlas.h System/cpp/textureAtlas.cpp
 
-        hpp/scene.h cpp/scene.cpp
+        Game/hpp/scene.h Game/cpp/scene.cpp
 
-        hpp/texture.h cpp/texture.cpp
+        System/hpp/texture.h System/cpp/texture.cpp
 
-        cpp/fileReader.cpp hpp/fileReader.h cpp/camera.cpp hpp/camera.h cpp/player.cpp hpp/player.h cpp/GUI.cpp hpp/GUI.h)
+        FileReader/fileReader.cpp FileReader/hpp/fileReader.h System/cpp/camera.cpp System/hpp/camera.h Game/cpp/player.cpp Game/hpp/player.h System/cpp/GUI.cpp System/hpp/GUI.h)
 
 target_link_libraries(AdventureGame ${SDL2_LIBRARIES}  ${SDL2_IMAGE_LIBRARIES} ${SDL2TTF_LIBRARY})

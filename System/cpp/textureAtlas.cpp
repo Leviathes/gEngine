@@ -3,7 +3,7 @@
 //
 
 #include "../hpp/textureAtlas.h"
-#include "../hpp/game.h"
+#include "../../Game/hpp/game.h"
 
 
 bool textureAtlas::set(const string& path) {

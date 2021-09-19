@@ -4,8 +4,8 @@
 
 #ifndef ADVETUREGAME_ENTITY_H
 #define ADVETUREGAME_ENTITY_H
-#include "common.h"
-#include "texture.h"
+#include "../../System/hpp/common.h"
+#include "../../System/hpp/texture.h"
 
 class entity {
 public:
