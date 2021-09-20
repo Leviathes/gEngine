@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_BUILD_TYPE=Release -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /Users/lucasholmes/DEV/AdventureGame
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/lucasholmes/DEV/AdventureGame/bin/Windows
