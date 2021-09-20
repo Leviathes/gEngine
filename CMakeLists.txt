@@ -12,26 +12,27 @@ find_package(SDL2TTF REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2TTF_INCLUDE_DIRS})
 
 add_executable(AdventureGame
-        ../Game/cpp/main.cpp
-        ../System/hpp/common.h
-        ../System/hpp/toolBox.h ../System/cpp/toolBox.cpp
-        ../System/hpp/engine.h ../System/cpp/engine.cpp
-        ../Game/hpp/game.h ../Game/cpp/game.cpp
+        Game/cpp/main.cpp
+        System/hpp/common.h
+        System/hpp/toolBox.h System/cpp/toolBox.cpp
+        System/hpp/engine.h System/cpp/engine.cpp
+        Game/hpp/game.h Game/cpp/game.cpp
 
-        ../Game/hpp/entity.h ../Game/cpp/entity.cpp
+        Game/hpp/entity.h Game/cpp/entity.cpp
 
-        ../System/hpp/vd2d.h ../System/cpp/vd2d.cpp
+        System/hpp/vd2d.h System/cpp/vd2d.cpp
 
-        ../System/hpp/renderer.h ../System/cpp/renderer.cpp
+        System/hpp/renderer.h System/cpp/renderer.cpp
 
-        ../Game/hpp/sprite.h ../Game/cpp/sprite.cpp
+        Game/hpp/sprite.h Game/cpp/sprite.cpp
 
-        ../System/hpp/textureAtlas.h ../System/cpp/textureAtlas.cpp
+        System/hpp/textureAtlas.h System/cpp/textureAtlas.cpp
 
-        ../Game/hpp/scene.h ../Game/cpp/scene.cpp
+        Game/hpp/scene.h Game/cpp/scene.cpp
+        Game/Character_Types/hpp/builder.h
+        Game/Character_Types/cpp/builder.cpp
+        System/hpp/texture.h System/cpp/texture.cpp
 
-        ../System/hpp/texture.h ../System/cpp/texture.cpp
-
-        ../FileReader/fileReader.cpp ../FileReader/hpp/fileReader.h ../System/cpp/camera.cpp ../System/hpp/camera.h ../Game/cpp/player.cpp ../Game/hpp/player.h ../System/cpp/GUI.cpp ../System/hpp/GUI.h)
+        FileReader/fileReader.cpp FileReader/hpp/fileReader.h System/cpp/camera.cpp System/hpp/camera.h Game/cpp/player.cpp Game/hpp/player.h System/cpp/GUI.cpp System/hpp/GUI.h)
 
 target_link_libraries(AdventureGame ${SDL2_LIBRARIES}  ${SDL2_IMAGE_LIBRARIES} ${SDL2TTF_LIBRARY})

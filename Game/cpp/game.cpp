@@ -3,6 +3,7 @@
 //
 
 #include "../hpp/game.h"
+#include "../Character_Types/hpp/builder.h"
 #include "../../System/hpp/engine.h"
 
 game::game() {
@@ -16,7 +17,7 @@ game::~game() {}
 
 
 void game::run() {
-	entity player{p1.pos, {11,5}, {128,128}, {128,128}, 64};
+	builder player{p1.pos, {11,5}, {128,128}, {128,128}, 64};
 
 	currentScene->mainAtlas.texture = Renderer.loadTexture("medieval_tilesheet.png");
 	currentScene->guiAtlas.texture = Renderer.loadTexture("interfacePack_32x.png");
