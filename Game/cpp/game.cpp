@@ -3,7 +3,10 @@
 //
 
 #include "../hpp/game.h"
-#include "../Character_Types/hpp/builder.h"
+#include "../Character_Types/hpp/worker.h"
+#include "../Character_Types/hpp/king.h"
+#include "../Character_Types/hpp/healer.h"
+#include "../Character_Types/hpp/fighter.h"
 #include "../../System/hpp/engine.h"
 
 game::game() {
@@ -17,14 +20,24 @@ game::~game() {}
 
 
 void game::execute() {
-	builder player{p1.getPos()};
+	worker w{{10, 10}};
+	fighter f {{20,20}};
+	healer h {{30,30}};
+	king k{{40,40}};
+
+
 
 	currentScene->mainAtlas.texture = Renderer.loadTexture("medieval_tilesheet.png");
 	currentScene->guiAtlas.texture = Renderer.loadTexture("interfacePack_32x.png");
 	currentScene->fillGUI();
 	currentScene->fillBlocks("scene_data.txt");
-	currentScene->entities[scene::people].emplace_back(player);
-	currentScene->addPeopleRandom({1000});
+
+	currentScene->entities[scene::people].emplace_back(w);
+	currentScene->entities[scene::people].emplace_back(f);
+	currentScene->entities[scene::people].emplace_back(h);
+	currentScene->entities[scene::people].emplace_back(k);
+
+	currentScene->addPeopleRandom({0});
 	dbm(std::to_string(currentScene->entities[scene::people].size()));
 	dbm("running...");
 	dbm("DEBUGGING ON");

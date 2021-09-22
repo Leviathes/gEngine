@@ -50,9 +50,9 @@ static string deBugHelp(){
 
 enum Character_Types {
 	Worker = 12,
-	Wizard,
+	Healer,
 	Fighter,
-	Fighter_lvl2,
+	Fighter_Armored,
 	King
 };
 

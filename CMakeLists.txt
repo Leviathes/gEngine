@@ -29,10 +29,10 @@ add_executable(AdventureGame
         System/hpp/textureAtlas.h System/cpp/textureAtlas.cpp
 
         Game/hpp/scene.h Game/cpp/scene.cpp
-        Game/Character_Types/hpp/builder.h
-        Game/Character_Types/cpp/builder.cpp
+        Game/Character_Types/hpp/worker.h
+        Game/Character_Types/cpp/worker.cpp
         System/hpp/texture.h System/cpp/texture.cpp
 
-        FileReader/fileReader.cpp FileReader/hpp/fileReader.h System/cpp/camera.cpp System/hpp/camera.h Game/cpp/player.cpp Game/hpp/player.h Game/cpp/GUI.cpp Game/hpp/GUI.h)
+        FileReader/fileReader.cpp FileReader/hpp/fileReader.h System/cpp/camera.cpp System/hpp/camera.h Game/cpp/player.cpp Game/hpp/player.h Game/cpp/GUI.cpp Game/hpp/GUI.h Game/Character_Types/cpp/fighter.cpp Game/Character_Types/hpp/fighter.h Game/Character_Types/cpp/healer.cpp Game/Character_Types/hpp/healer.h Game/Character_Types/cpp/king.cpp Game/Character_Types/hpp/king.h)
 
 target_link_libraries(AdventureGame ${SDL2_LIBRARIES}  ${SDL2_IMAGE_LIBRARIES} ${SDL2TTF_LIBRARY})
