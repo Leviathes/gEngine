@@ -8,9 +8,11 @@
 #include <iostream>
 #include <vector>
 
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
+
+#include "SDL.h"
+#include "SDL_image.h"
+#include "SDL_ttf.h"
+
 
 #include "vd2d.h"
 #include "toolBox.h"

@@ -10,7 +10,7 @@
 #include "player.h"
 
 
-//class engine;
+class engine;
 
 class game : public engine {
 	SDL_Event* event;

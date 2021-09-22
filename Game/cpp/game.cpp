@@ -10,9 +10,12 @@
 #include "../../System/hpp/engine.h"
 
 game::game() {
-	init();
+	dbm("game constructor");
+	if(!init()) {
+		err("Failed to init() in game.cpp");
+	}
 	event = new SDL_Event;
-	currentScene = new scene{"medieval_tilesheet.png"};
+	currentScene = new scene{"tilemap.png"};
 
 }
 game::~game() {}
@@ -20,6 +23,8 @@ game::~game() {}
 
 
 void game::execute() {
+
+	std::cout << "path: " << getDir("");
 	worker w{{10, 10}};
 	fighter f {{20,20}};
 	healer h {{30,30}};
@@ -27,7 +32,7 @@ void game::execute() {
 
 
 
-	currentScene->mainAtlas.texture = Renderer.loadTexture("medieval_tilesheet.png");
+	currentScene->mainAtlas.texture = Renderer.loadTexture("tilemap.png");
 	currentScene->guiAtlas.texture = Renderer.loadTexture("interfacePack_32x.png");
 	currentScene->fillGUI();
 	currentScene->fillBlocks("scene_data.txt");
@@ -139,8 +144,8 @@ void game::mouseDown(const SDL_MouseButtonEvent& e) {
 	if(e.button == SDL_BUTTON_RIGHT) {
 
 		currentScene->addPeople({1}, {(double)((e.x - 44) - Renderer.view.pos.x), (double)(e.y - 84) - Renderer.view.pos.y});
-
-		cout << currentScene->entities[scene::people].size() << ": " << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getPos().x << " " <<currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getPos().y;
+        std::cout << "path: " << getDir("");
+		std::cout << currentScene->entities[scene::people].size() << ": " << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getPos().x << " " <<currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getPos().y;
 		cout << " {" << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getIndex().x << ", " << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getIndex().y << endl;
 	}
 	if(e.button == SDL_BUTTON_LEFT) {

@@ -7,8 +7,15 @@
 
 extern game game;
 namespace toolBox {
+
+
 	std::string getDir(const std::string &dir) {
+
+
+
 		const char PATH_STEP = '/';
+
+
 		static std::string baseRes;
 		if (baseRes.empty()) {
 			char *basePath = SDL_GetBasePath();
@@ -22,8 +29,9 @@ namespace toolBox {
 			size_t pos = baseRes.rfind("bin");
 
 			baseRes = baseRes.substr(0, pos) + "assets" + PATH_STEP;
-            std::cout << baseRes << std::endl;
+			std::cout << "path: " << baseRes << std::endl;
 		}
+		std::cout << "path: " << baseRes << std::endl;
 		return dir.empty() ? baseRes : baseRes + dir;
 	}
 
@@ -62,33 +70,43 @@ namespace toolBox {
 	}
 
 
-	void handleArgs(int &argc, char *argv[]) {
+	void handleArgs(int& argc, char *argv[]) {
 		static int i = 1;
-		while (i < argc) {
-			if ((string) argv[i] == help()) {
-				if (argc > i + 1) {
-					printHelp((string) argv[i + 1]);
-				} else {
-					toolBox::printHelp();
-				}
-				return;
+		std::cout << "hereeee\n";
+		if(argc < 2) {
+			cout << "here\n";
+			game.execute();
+			return;
+		} else {
 
-			}
-			if ((string) argv[i] == "-r") {
-				if (argc > i + 1) {
-					if ((string) argv[i + 1] == "--d") {
-						DBmode = true;
+			while (i<argc) {
+				if ((string) argv[i]==help()) {
+					if (argc>i+1) {
+						printHelp((string) argv[i+1]);
 					}
-				}
-				game.execute();
-			}
-			if ((string) argv[i] == "--d") {
-				DBmode = true;
-			} else {
-				DBmode = false;
-			}
+					else {
+						toolBox::printHelp();
+					}
+					return;
 
-			i += 1;
+				}
+				if ((string) argv[i]=="-r") {
+					if (argc>i+1) {
+						if ((string) argv[i+1]=="--d") {
+							DBmode = true;
+						}
+					}
+					game.execute();
+				}
+				if ((string) argv[i]=="--d") {
+					DBmode = true;
+				}
+				else {
+					DBmode = false;
+				}
+
+				i += 1;
+			}
 		}
 	}
 }
