@@ -2,11 +2,12 @@
 #define H_BUILDER
 #include "../../hpp/entity.h"
 
-class builder : public entity {
+class worker : public entity {
 
  public :
+	double team = {Team_Blue};
+  explicit worker(const vd2d& pos);
 
-  explicit builder(const vd2d& pos);
 
 
 };

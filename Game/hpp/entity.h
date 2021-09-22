@@ -22,8 +22,8 @@ protected:
 	vd2d pos;
 	vd2d dimensions;
 	vd2d index;
-	vd2d indexSize;
-	int margin;
+	vd2d indexSize = {128,128};
+	int margin = {64};
 
 	string filename;
 
