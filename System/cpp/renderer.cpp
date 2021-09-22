@@ -103,15 +103,15 @@ void renderer::blitGUI(const entity& gui, SDL_Texture* texture) {
 
 	SDL_Rect target;
 
+/// TODO: fix this, member variable passing is messed up.
+SDL_Rect clip = {(int)((gui.getIndex().x * gui.getIndexSize().x) + (gui.getIndex().x * gui.getMargin())) , (int)((gui.getIndex().y * gui.getIndexSize().y) + (gui.getIndex().y * gui.getMargin())), (int)gui.getDimensions().x, (int)gui.getDimensions().y};
 
-	SDL_Rect clip = {(int)((gui.index.x * gui.indexSize.x) + (gui.index.x * gui.margin)) , (int)((gui.index.y * gui.indexSize.y) + (gui.index.y * gui.margin)), (int)gui.dimensions.x, (int)gui.dimensions.y};
+target.x = (int)(gui.getPos().x);
+target.y = (int)(gui.getPos().y);
+target.h = (int)gui.getDimensions().y*3;
+target.w = (int)gui.getDimensions().x*3;
 
-	target.x = (int)(gui.pos.x);
-	target.y = (int)(gui.pos.y);
-	target.h = (int)gui.dimensions.y*3;
-	target.w = (int)gui.dimensions.x*3;
-
-	SDL_RenderCopy(Renderer, texture, &clip, &target);
+SDL_RenderCopy(Renderer, texture, &clip, &target);
 
 }
 
@@ -123,7 +123,7 @@ void renderer::renderGUI(const GUI& gui, SDL_Texture* texture) {
 
 void renderer::renderEntity(const entity& entity, SDL_Texture* texture) {
 
-	blitEntity(texture, entity.index, entity.pos, entity.dimensions,{entity.indexSize});
+	blitEntity(texture, entity.getIndex(), entity.getPos(), entity.getDimensions(),{entity.getIndexSize()});
 
 }
 

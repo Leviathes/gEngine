@@ -6,7 +6,7 @@ class builder : public entity {
 
  public :
 
-  explicit builder(vd2d pos);
+  explicit builder(const vd2d& pos);
 
 
 };

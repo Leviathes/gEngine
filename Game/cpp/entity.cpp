@@ -6,12 +6,31 @@
 
 
 
-vd2d entity::getPos() { return pos; }
-vd2d entity::getDimensions() { return dimensions; }
-vd2d entity::getIndex() {return index;}
-vd2d entity::getIndexSize() {return indexSize;}
-int entity::getMargin() {return margin;}
+vd2d entity::getPos() const { return pos; }
+vd2d entity::getDimensions() const { return dimensions; }
+vd2d entity::getIndex() const {return index;}
+vd2d entity::getIndexSize() const {return indexSize;}
+int entity::getMargin() const {return margin;}
 
+void entity::setPos(const vd2d& p) {
+	pos = p;
+}
+
+void entity::setDimensions(const vd2d &d) {
+	dimensions = d;
+}
+
+void entity::setIndex(const vd2d &i) {
+	index = i;
+}
+
+void entity::setIndexSize(const vd2d &is) {
+	indexSize = is;
+}
+
+void entity::setMargin(const int &m) {
+	margin = m;
+}
 
 entity::entity(const vd2d &pos, const vd2d &index, const vd2d &indexSize, const vd2d& dimensions, int margin) :pos(pos), index(index), dimensions(dimensions),  indexSize(indexSize), margin(margin) {
 

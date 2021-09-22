@@ -9,6 +9,16 @@
 
 class entity {
 public:
+	vd2d getPos() const;
+	vd2d getDimensions()const ;
+	vd2d getIndex() const;
+	vd2d getIndexSize() const;
+	int getMargin() const;
+	void walkRandom();
+	entity(const vd2d& pos, const vd2d& index, const vd2d& indexSize, const vd2d& dimensions, int margin);
+	entity(const vd2d& pos, const vd2d& index);
+	entity();
+protected:
 	vd2d pos;
 	vd2d dimensions;
 	vd2d index;
@@ -16,27 +26,19 @@ public:
 	int margin;
 
 	string filename;
-public:
 
-    vd2d getPos();
-    vd2d getDimensions();
-    vd2d getIndex();
-    vd2d getIndexSize();
-    int getMargin();
+
+
 
     void setPos(const vd2d& p);
     void setDimensions(const vd2d& d);
     void setIndex(const vd2d& i);
     void setIndexSize(const vd2d& is);
-    void setMargin(const vd2d& m);
+    void setMargin(const int& m);
 
-protected:
 
-	entity(const vd2d& pos, const vd2d& index, const vd2d& indexSize, const vd2d& dimensions, int margin);
-	entity(const vd2d& pos, const vd2d& index);
-	entity();
 
-	void walkRandom();
+
 
 
 

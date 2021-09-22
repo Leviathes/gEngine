@@ -33,6 +33,6 @@ add_executable(AdventureGame
         Game/Character_Types/cpp/builder.cpp
         System/hpp/texture.h System/cpp/texture.cpp
 
-        FileReader/fileReader.cpp FileReader/hpp/fileReader.h System/cpp/camera.cpp System/hpp/camera.h Game/cpp/player.cpp Game/hpp/player.h System/cpp/GUI.cpp System/hpp/GUI.h)
+        FileReader/fileReader.cpp FileReader/hpp/fileReader.h System/cpp/camera.cpp System/hpp/camera.h Game/cpp/player.cpp Game/hpp/player.h Game/cpp/GUI.cpp Game/hpp/GUI.h)
 
 target_link_libraries(AdventureGame ${SDL2_LIBRARIES}  ${SDL2_IMAGE_LIBRARIES} ${SDL2TTF_LIBRARY})

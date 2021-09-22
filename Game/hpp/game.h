@@ -23,7 +23,7 @@ player p1;
 
 	game();
 	~game();
-	void run();
+	void execute();
 	void handleEvents();
 	void loop();
 
