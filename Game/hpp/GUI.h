@@ -4,8 +4,8 @@
 
 #ifndef ADVENTUREGAME_GUI_H
 #define ADVENTUREGAME_GUI_H
-#include "common.h"
-#include "../../Game/hpp/entity.h"
+#include "../../System/hpp/common.h"
+#include "entity.h"
 
 class GUI {
 public:

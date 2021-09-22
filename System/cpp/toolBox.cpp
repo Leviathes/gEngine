@@ -28,19 +28,19 @@ namespace toolBox {
 	}
 
 	void printHelp() {
-		printHelp(help);
-		printHelp(run);
-		printHelp(deBug);
+		printHelp(help());
+		printHelp(run());
+		printHelp(deBug());
 	}
 
 	void printHelp(const std::string &helpCommand) {
-		if (helpCommand == run) {
+		if (helpCommand == run()) {
 			cout << runHelp;
 		}
-		if (helpCommand == deBug) {
+		if (helpCommand == deBug()) {
 			cout << deBugHelp;
 		}
-		if (helpCommand == help) {
+		if (helpCommand == help()) {
 			cout << helpHelp;
 		}
 
@@ -65,7 +65,7 @@ namespace toolBox {
 	void handleArgs(int &argc, char *argv[]) {
 		static int i = 1;
 		while (i < argc) {
-			if ((string) argv[i] == help) {
+			if ((string) argv[i] == help()) {
 				if (argc > i + 1) {
 					printHelp((string) argv[i + 1]);
 				} else {
@@ -80,7 +80,7 @@ namespace toolBox {
 						DBmode = true;
 					}
 				}
-				game.run();
+				game.execute();
 			}
 			if ((string) argv[i] == "--d") {
 				DBmode = true;

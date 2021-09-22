@@ -55,7 +55,7 @@ EQUALS = =
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /Users/lucasholmes/DEV/AdventureGame
 
-# The top-level build directory on which CMake was run.
+# The top-level build directory on which CMake was execute.
 CMAKE_BINARY_DIR = /Users/lucasholmes/DEV/AdventureGame/bin/Windows
 
 # Include any dependencies generated for this target.

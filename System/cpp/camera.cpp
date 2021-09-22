@@ -10,6 +10,6 @@ camera::camera() : pos({-50,-50}) {
 }
 
 void camera::move(const player& p) {
-	pos = p.pos;
+	pos = p.getPos();
 
 }

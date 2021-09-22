@@ -16,8 +16,8 @@ game::~game() {}
 
 
 
-void game::run() {
-	builder player{p1.pos, {11,5}, {128,128}, {128,128}, 64};
+void game::execute() {
+	builder player{p1.getPos()};
 
 	currentScene->mainAtlas.texture = Renderer.loadTexture("medieval_tilesheet.png");
 	currentScene->guiAtlas.texture = Renderer.loadTexture("interfacePack_32x.png");
@@ -127,15 +127,15 @@ void game::mouseDown(const SDL_MouseButtonEvent& e) {
 
 		currentScene->addPeople({1}, {(double)((e.x - 44) - Renderer.view.pos.x), (double)(e.y - 84) - Renderer.view.pos.y});
 
-		cout << currentScene->entities[scene::people].size() << ": " << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].pos.x << " " <<currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].pos.y;
-		cout << " {" << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].index.x << ", " << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].index.y << endl;
+		cout << currentScene->entities[scene::people].size() << ": " << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getPos().x << " " <<currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getPos().y;
+		cout << " {" << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getIndex().x << ", " << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getIndex().y << endl;
 	}
 	if(e.button == SDL_BUTTON_LEFT) {
 		if(e.clicks == 2) {
 			cout << e.x << " " << e.y << endl;
 			for(int i = 0; i < currentScene->entities[scene::people].size(); ++i) {
-				if(e.x - Renderer.view.pos.x > (currentScene->entities[scene::people][i].pos.x +40) && e.x - Renderer.view.pos.x < currentScene->entities[scene::people][i].pos.x + 90) {
-					if(e.y -Renderer.view.pos.y>  (currentScene->entities[scene::people][i].pos.y +40) && e.y - Renderer.view.pos.y< currentScene->entities[scene::people][i].pos.y + 94) {
+				if(e.x - Renderer.view.pos.x > (currentScene->entities[scene::people][i].getPos().x +40) && e.x - Renderer.view.pos.x < currentScene->entities[scene::people][i].getPos().x + 90) {
+					if(e.y -Renderer.view.pos.y>  (currentScene->entities[scene::people][i].getPos().y +40) && e.y - Renderer.view.pos.y< currentScene->entities[scene::people][i].getPos().y + 94) {
 					currentScene->entities[scene::people].erase(currentScene->entities[scene::people].begin()+i);
 					}
 				}
