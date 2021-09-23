@@ -5,7 +5,7 @@
 #include "../hpp/toolBox.h"
 
 
-extern game game;
+extern game g;
 namespace toolBox {
 
 
@@ -29,9 +29,9 @@ namespace toolBox {
 			size_t pos = baseRes.rfind("bin");
 
 			baseRes = baseRes.substr(0, pos) + "assets" + PATH_STEP;
-			std::cout << "path: " << baseRes << std::endl;
+
 		}
-		std::cout << "path: " << baseRes << std::endl;
+
 		return dir.empty() ? baseRes : baseRes + dir;
 	}
 
@@ -70,12 +70,12 @@ namespace toolBox {
 	}
 
 
-	void handleArgs(int& argc, char *argv[]) {
+	void handleArgs(int& argc, char *argv[], game& g) {
 		static int i = 1;
-		std::cout << "hereeee\n";
+
 		if(argc < 2) {
-			cout << "here\n";
-			game.execute();
+
+			g.execute();
 			return;
 		} else {
 
@@ -96,7 +96,7 @@ namespace toolBox {
 							DBmode = true;
 						}
 					}
-					game.execute();
+					g.execute();
 				}
 				if ((string) argv[i]=="--d") {
 					DBmode = true;

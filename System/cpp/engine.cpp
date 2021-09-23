@@ -42,7 +42,7 @@ bool engine::init() {
 		return false;
 	}
 
-	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "fastest");
 
 
 	if(!(Renderer.set(SDL_CreateRenderer(Window, -1, rendererFlags)))) {

@@ -12,6 +12,7 @@ class camera {
 public:
 	vd2d pos;
 	SDL_Rect* cameraView;
+	double zoomFactor {1};
 
 	camera();
 

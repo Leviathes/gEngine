@@ -29,7 +29,7 @@ player p1;
 
 	void keyDown(const SDL_KeyboardEvent& e);
 	void keyUp(const  SDL_KeyboardEvent& e);
-
+	void mouseWheelUp(SDL_MouseWheelEvent& e);
 	void mouseDown(const SDL_MouseButtonEvent& e);
 	void mouseUp(const SDL_MouseButtonEvent& e);
 

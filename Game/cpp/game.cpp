@@ -24,7 +24,7 @@ game::~game() {}
 
 void game::execute() {
 
-	std::cout << "path: " << getDir("");
+
 	worker w{{10, 10}};
 	fighter f {{20,20}};
 	healer h {{30,30}};
@@ -42,7 +42,7 @@ void game::execute() {
 	currentScene->entities[scene::people].emplace_back(h);
 	currentScene->entities[scene::people].emplace_back(k);
 
-	currentScene->addPeopleRandom({0});
+	currentScene->addPeopleRandom({1});
 	dbm(std::to_string(currentScene->entities[scene::people].size()));
 	dbm("running...");
 	dbm("DEBUGGING ON");
@@ -84,6 +84,9 @@ void game::handleEvents() {
 		}
 		if(event->type == SDL_MOUSEBUTTONUP) {
 			mouseUp(event->button);
+		}
+		if(event->type == SDL_MOUSEWHEEL) {
+			mouseWheelUp(event->wheel);
 		}
 	}
 }
@@ -143,17 +146,22 @@ void game::keyUp(const SDL_KeyboardEvent& e) {
 void game::mouseDown(const SDL_MouseButtonEvent& e) {
 	if(e.button == SDL_BUTTON_RIGHT) {
 
-		currentScene->addPeople({1}, {(double)((e.x - 44) - Renderer.view.pos.x), (double)(e.y - 84) - Renderer.view.pos.y});
+
+		/// ZOOM AND LOCATION transform equation
+		currentScene->addPeople({1}, {(double)((e.x / Renderer.view.zoomFactor) - 20 + Renderer.view.pos.x), (double)((e.y / Renderer.view.zoomFactor) - 20 - Renderer.view.pos.y) });
+		///
+
         std::cout << "path: " << getDir("");
-		std::cout << currentScene->entities[scene::people].size() << ": " << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getPos().x << " " <<currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getPos().y;
-		cout << " {" << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getIndex().x << ", " << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getIndex().y << endl;
+
+		std::cout << currentScene->entities[scene::people].size() << ": " << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getPos().x << ", " <<currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getPos().y;
+		cout << " {" << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getIndex().x << ", " << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getIndex().y << "}" << endl;
 	}
 	if(e.button == SDL_BUTTON_LEFT) {
 		if(e.clicks == 2) {
 			cout << e.x << " " << e.y << endl;
 			for(int i = 0; i < currentScene->entities[scene::people].size(); ++i) {
-				if(e.x - Renderer.view.pos.x > (currentScene->entities[scene::people][i].getPos().x +40) && e.x - Renderer.view.pos.x < currentScene->entities[scene::people][i].getPos().x + 90) {
-					if(e.y -Renderer.view.pos.y>  (currentScene->entities[scene::people][i].getPos().y +40) && e.y - Renderer.view.pos.y< currentScene->entities[scene::people][i].getPos().y + 94) {
+				if(e.x - Renderer.view.pos.x > (currentScene->entities[scene::people][i].getPos().x +20) && e.x - Renderer.view.pos.x < currentScene->entities[scene::people][i].getPos().x + 90) {
+					if(e.y -Renderer.view.pos.y>  (currentScene->entities[scene::people][i].getPos().y +20) && e.y - Renderer.view.pos.y< currentScene->entities[scene::people][i].getPos().y + 94) {
 					currentScene->entities[scene::people].erase(currentScene->entities[scene::people].begin()+i);
 					}
 				}
@@ -165,5 +173,19 @@ void game::mouseDown(const SDL_MouseButtonEvent& e) {
 
 void game::mouseUp(const SDL_MouseButtonEvent& e) {
 
+}
+
+void game::mouseWheelUp(SDL_MouseWheelEvent &e) {
+	if (e.y > 0) {
+		if(Renderer.view.zoomFactor < 3) {
+			Renderer.view.zoomFactor += 0.250;
+		}
+
+	}
+	if(e.y < 0) {
+		if(Renderer.view.zoomFactor > 0.4) {
+			Renderer.view.zoomFactor -= 0.250;
+		}
+	}
 }
 

@@ -36,11 +36,11 @@ entity::entity(const vd2d &pos, const vd2d &index, const vd2d &indexSize, const 
 
 }
 
-entity::entity(const vd2d &pos, const vd2d &index) : pos(pos), index(index), indexSize({128,128}), dimensions({128,128}) {
+entity::entity(const vd2d &pos, const vd2d &index) : pos(pos), index(index), indexSize({16,16}), dimensions({16,16}), margin(1) {
 
 }
 
-entity::entity() : indexSize({ 128, 128 }), dimensions({ 128, 128 }), margin(64) {}
+entity::entity() : indexSize({ 16, 16 }), dimensions({ 16, 16 }), margin(1) {}
 
 void entity::walkRandom(){
 	double direction = rand() % 5;

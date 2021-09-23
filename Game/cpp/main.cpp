@@ -7,11 +7,11 @@
 
 
 
-game game();
+static game game;
 
 int main(int argc, char* argv[]) {
 	dbm("HELLO??\n");
-	handleArgs(argc, argv);
+	handleArgs(argc, argv, game);
 
 	return 0;
 }

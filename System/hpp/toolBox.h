@@ -22,7 +22,7 @@ namespace toolBox {
 	 ///Debugging error - err()
 	 void err(const std::string& message);
 	 void dbm(const std::string& message);
-	 void handleArgs(int& argc, char* argv[]);
+	 void handleArgs(int& argc, char* argv[], game& g);
 
 
 	 /// Templated cleanup function for ALL POINTERS!!
