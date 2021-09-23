@@ -27,7 +27,6 @@ void scene::fillGUI() {
 
 }
 
-
 void scene::addPeople(const int& amount, const vd2d &pos) {
 	for(int i = 0; i < amount; ++i) {
 		entities[people].emplace_back(entity {pos, {(11 + (double)(rand() % 6)),(3 + (double)(rand() % 4))}});
@@ -36,6 +35,6 @@ void scene::addPeople(const int& amount, const vd2d &pos) {
 
 void scene::addPeopleRandom(const int &amount) {
 	for(int i = 0; i < amount; ++i) {
-		entities[people].emplace_back(entity {{(double)(rand()%10000), (double)(rand()%10000)}, {(11 + (double)(rand() % 6)),(5 + (double)(rand() % 4))}});
+		entities[people].emplace_back(entity {{(double)(rand()%10000), (double)(rand()%10000)}, {(11 + (double)(rand() % 6)),(3 + (double)(rand() % 4))}});
 	}
 }

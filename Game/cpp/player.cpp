@@ -14,8 +14,8 @@ player::player() {
 }
 
 void player::move() {
-	if (up) {pos.y += 3;}
-	if (down) {pos.y -= 3;}
-	if (left) {pos.x += 3;}
-	if (right) {pos.x -= 3;}
+	if (up) {pos.y += 5;}
+	if (down) {pos.y -= 5;}
+	if (left) {pos.x -= 5;}
+	if (right) {pos.x += 5;}
 }

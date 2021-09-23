@@ -14,10 +14,10 @@ include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2TTF_IN
 add_executable(AdventureGame
         Game/cpp/main.cpp
         System/hpp/common.h
-        System/hpp/toolBox.h System/cpp/toolBox.cpp
+
         System/hpp/engine.h System/cpp/engine.cpp
         Game/hpp/game.h Game/cpp/game.cpp
-
+        System/hpp/toolBox.h System/cpp/toolBox.cpp
         Game/hpp/entity.h Game/cpp/entity.cpp
 
         System/hpp/vd2d.h System/cpp/vd2d.cpp
@@ -35,4 +35,4 @@ add_executable(AdventureGame
 
         FileReader/fileReader.cpp FileReader/hpp/fileReader.h System/cpp/camera.cpp System/hpp/camera.h Game/cpp/player.cpp Game/hpp/player.h Game/cpp/GUI.cpp Game/hpp/GUI.h Game/Character_Types/cpp/fighter.cpp Game/Character_Types/hpp/fighter.h Game/Character_Types/cpp/healer.cpp Game/Character_Types/hpp/healer.h Game/Character_Types/cpp/king.cpp Game/Character_Types/hpp/king.h)
 
-target_link_libraries(AdventureGame ${SDL2_LIBRARIES}  ${SDL2_IMAGE_LIBRARIES} ${SDL2TTF_LIBRARY})
+target_link_libraries(AdventureGame ${SDL2_LIBRARIES}  ${SDL2_IMAGE_LIBRARIES} ${SDL2TTF_LIBRARY} )
