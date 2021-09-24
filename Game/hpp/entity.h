@@ -14,15 +14,17 @@ public:
 	vd2d getIndex() const;
 	vd2d getIndexSize() const;
 	int getMargin() const;
+	int getScale() const;
 	void walkRandom();
-	entity(const vd2d& pos, const vd2d& index, const vd2d& indexSize, const vd2d& dimensions, int margin);
+	entity(const vd2d& pos, const vd2d& index, const vd2d& indexSize, const vd2d& dimensions, int margin, int scale =1);
 	entity(const vd2d& pos, const vd2d& index);
 	entity();
 protected:
 	vd2d pos;
-	vd2d dimensions;
+	vd2d dimensions = {16, 16} ;
 	vd2d index;
 	vd2d indexSize = {16,16};
+	int scale = {1};
 	int margin = {1};
 
 	string filename;

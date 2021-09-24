@@ -42,7 +42,7 @@ void game::execute() {
 	currentScene->entities[scene::people].emplace_back(h);
 	currentScene->entities[scene::people].emplace_back(k);
 
-	currentScene->addPeopleRandom({1});
+	currentScene->addPeopleRandom({10});
 	dbm(std::to_string(currentScene->entities[scene::people].size()));
 	dbm("running...");
 	dbm("DEBUGGING ON");
@@ -63,7 +63,13 @@ void game::execute() {
 
 
 	}
+
 	dbm("quitting...");
+	if(!shiftModifier) {
+		currentScene->saveBlocks();
+		dbm("saving");
+	}
+
 }
 
 
@@ -88,19 +94,45 @@ void game::handleEvents() {
 		if(event->type == SDL_MOUSEWHEEL) {
 			mouseWheelUp(event->wheel);
 		}
+		if(event->type == SDL_MOUSEMOTION) {
+		 	mouseMotion(event->motion);
+
+		}
 	}
 }
 
 void game::loop() {
-	handleEvents();
+
 	if(currentScene->spawn) {
 
 	}
+	handleEvents();
 	p1.move();
 	Renderer.view.move(p1);
 	for(int i = 0; i < currentScene->entities[scene::people].size(); ++i) {
 		currentScene->entities[scene::people][i].walkRandom();
 	}
+
+
+		///center
+		Renderer.showBlockStore({(100*2)+1, 616- 92}, *currentScene, {currentScene->blockStore.x,currentScene->blockStore.y});
+		///domo
+		Renderer.showBlockStore({(100*2)+1, 616- 92*2}, *currentScene, {currentScene->blockStore.x,currentScene->blockStore.y-1});
+		///mo
+		Renderer.showBlockStore({(100*2)+1, 616}, *currentScene, {currentScene->blockStore.x,currentScene->blockStore.y+1});
+		///rigmo
+		Renderer.showBlockStore({100+8, 616 - 92}, *currentScene, {currentScene->blockStore.x -1,currentScene->blockStore.y});
+		///lemo
+		Renderer.showBlockStore({(100*3) -8, 616- 92}, *currentScene, {currentScene->blockStore.x +1,currentScene->blockStore.y});
+		///bottom rigmo
+		Renderer.showBlockStore({100+8, 616- 92*2}, *currentScene, {currentScene->blockStore.x - 1,currentScene->blockStore.y -1});
+		///bottom lemo
+		Renderer.showBlockStore({100+8, 616}, *currentScene, {currentScene->blockStore.x-1,currentScene->blockStore.y+1});
+		///top rigmo
+		Renderer.showBlockStore({(100*3)-8, 616- 92*2}, *currentScene, {currentScene->blockStore.x+1,currentScene->blockStore.y-1});
+		///top lemo
+		Renderer.showBlockStore({(100*3)-8, 616}, *currentScene, {currentScene->blockStore.x+1,currentScene->blockStore.y+1});
+
 
 
 }
@@ -120,6 +152,34 @@ void game::keyDown(const SDL_KeyboardEvent& e) {
 		if(e.keysym.scancode == SDL_SCANCODE_D) {
 			p1.right = true;
 		}
+		if(e.keysym.scancode == SDL_SCANCODE_LSHIFT) {
+			shiftModifier = true;
+		}
+		if(e.keysym.scancode == SDL_SCANCODE_UP) {
+			currentScene->blockStore.y -= 1;
+			if(currentScene->blockStore.y < 0) {
+				currentScene->blockStore.y = 0;
+			}
+		}
+		if(e.keysym.scancode == SDL_SCANCODE_DOWN) {
+			currentScene->blockStore.y += 1;
+			if(currentScene->blockStore.y > 2) {
+				currentScene->blockStore.y = 2;
+			}
+		}
+		if(e.keysym.scancode == SDL_SCANCODE_LEFT) {
+			currentScene->blockStore.x -= 1;
+			if(currentScene->blockStore.x < 0) {
+				currentScene->blockStore.x = 0;
+			}
+		}
+		if(e.keysym.scancode == SDL_SCANCODE_RIGHT) {
+			currentScene->blockStore.x += 1;
+			if(currentScene->blockStore.x > 9) {
+				currentScene->blockStore.x = 9;
+			}
+		}
+
 
 	}
 }
@@ -138,6 +198,9 @@ void game::keyUp(const SDL_KeyboardEvent& e) {
 		if(e.keysym.scancode == SDL_SCANCODE_D) {
 			p1.right = false;
 		}
+		if(e.keysym.scancode == SDL_SCANCODE_LSHIFT) {
+			shiftModifier = false;
+		}
 
 	}
 }
@@ -146,15 +209,69 @@ void game::keyUp(const SDL_KeyboardEvent& e) {
 void game::mouseDown(const SDL_MouseButtonEvent& e) {
 	if(e.button == SDL_BUTTON_RIGHT) {
 
+		if(shiftModifier) {
 
-		/// ZOOM AND LOCATION transform equation
-		currentScene->addPeople({1}, {(double)((e.x / Renderer.view.zoomFactor) - 20 + Renderer.view.pos.x), (double)((e.y / Renderer.view.zoomFactor) - 20 - Renderer.view.pos.y) });
-		///
 
-        std::cout << "path: " << getDir("");
+			/// converts screen coordinates to world coordinates
+			double Mouse_x = (e.x/Renderer.view.zoomFactor)  + (Renderer.view.pos.x );
+			double Mouse_y = (e.y/Renderer.view.zoomFactor)  - (Renderer.view.pos.y );
 
-		std::cout << currentScene->entities[scene::people].size() << ": " << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getPos().x << ", " <<currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getPos().y;
-		cout << " {" << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getIndex().x << ", " << currentScene->entities[scene::people][currentScene->entities[scene::people].size()-1].getIndex().y << "}" << endl;
+
+			double Block_offSet = (128 * Renderer.view.zoomFactor);
+
+
+
+			dbm("SHIFT");
+		//	cout << Mouse_x << " <= " << (3*(128*Renderer.view.zoomFactor))  - Renderer.view.pos.x<< endl;
+		//	cout << Mouse_y << " <= " << (1*(128*Renderer.view.zoomFactor))  + Renderer.view.pos.y<< endl;
+			cout << "mouse:"  << Mouse_x << ", " << Mouse_y << endl;
+			for (int y = 0; y < currentScene->blocks.size(); ++y) {
+				for(int x = 0; x < currentScene->blocks[y].size(); ++x) {
+
+						double Block_x = ((x) * (128 * Renderer.view.zoomFactor) ) ;
+						double Block_y = ((y+1) * (128 * (Renderer.view.zoomFactor)) ) ;
+
+
+
+					if(Mouse_x * Renderer.view.zoomFactor < (Block_x + Block_offSet ) ){
+						if(Mouse_x > Block_x / Renderer.view.zoomFactor  ) {
+							if(Mouse_y * Renderer.view.zoomFactor > Block_y - Block_offSet ) {
+								if(Mouse_y < Block_y / Renderer.view.zoomFactor ) {
+
+									currentScene->changeBlock({(double)y,(double)x});
+
+									cout << "blocck:" << Block_x << ", " << Block_y << endl;
+									return;
+								}
+
+							}
+						}
+
+					}
+				}
+
+			}
+
+		} else {
+
+			/// ZOOM AND LOCATION transform equation - Turns screen coord into world coord
+			currentScene->addPeople({(double) ((e.x / Renderer.view.zoomFactor) - 20 + Renderer.view.pos.x),
+									      (double) ((e.y / Renderer.view.zoomFactor) - 20 - Renderer.view.pos.y)});
+			///
+
+			std::cout << "path: " << getDir("");
+
+			std::cout << currentScene->entities[scene::people].size() << ": "
+					  << currentScene->entities[scene::people][currentScene->entities[scene::people].size() -
+															   1].getPos().x << ", "
+					  << currentScene->entities[scene::people][currentScene->entities[scene::people].size() -
+															   1].getPos().y;
+			cout << " {"
+				 << currentScene->entities[scene::people][currentScene->entities[scene::people].size() - 1].getIndex().x
+				 << ", "
+				 << currentScene->entities[scene::people][currentScene->entities[scene::people].size() - 1].getIndex().y
+				 << "}" << endl;
+		}
 	}
 	if(e.button == SDL_BUTTON_LEFT) {
 		if(e.clicks == 2) {
@@ -187,5 +304,14 @@ void game::mouseWheelUp(SDL_MouseWheelEvent &e) {
 			Renderer.view.zoomFactor -= 0.250;
 		}
 	}
+}
+
+void game::mouseMotion(const SDL_MouseMotionEvent &e) {
+
+	mousePos.x = e.x;
+	mousePos.y = e.y;
+
+
+
 }
 

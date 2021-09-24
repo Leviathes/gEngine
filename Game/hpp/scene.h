@@ -20,13 +20,17 @@ public:
 	vector<GUI> ui{{}, {}, {}};
 
 
+
+	vd2d blockStore{5,2};
 	bool spawn{false};
 
 
 
 	void fillBlocks(const string& file);
+	void saveBlocks();
+	void changeBlock(const vd2d& index);
 	void fillGUI();
-	void addPeople(const int& amount, const vd2d &pos);
+	void addPeople(const vd2d &pos, const int& type = Worker, const int& team = Team_Blue);
 	void addPeopleRandom(const int& amount);
 	scene(const string& atlasPath);
 

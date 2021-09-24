@@ -15,9 +15,19 @@ class engine;
 class game : public engine {
 	SDL_Event* event;
 	scene* currentScene;
+	bool shiftModifier{false};
+	vd2d mousePos {5,5};
+	///mouse offset to center things to the pointer
+	int mo{-132};
+	/// index offset to offset from the the mouse offset
+	int io {64};
+
 
 public:
 player p1;
+
+ double bsx{92};
+ double bsy{600};
 
 
 
@@ -32,9 +42,10 @@ player p1;
 	void mouseWheelUp(SDL_MouseWheelEvent& e);
 	void mouseDown(const SDL_MouseButtonEvent& e);
 	void mouseUp(const SDL_MouseButtonEvent& e);
+	void mouseMotion(const SDL_MouseMotionEvent& e);
 
 
-
+const vd2d VERTICAL_PATH {5,0};
 
 
 };
