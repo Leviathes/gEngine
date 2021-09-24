@@ -11,6 +11,7 @@ vd2d entity::getDimensions() const { return dimensions; }
 vd2d entity::getIndex() const {return index;}
 vd2d entity::getIndexSize() const {return indexSize;}
 int entity::getMargin() const {return margin;}
+int entity::getScale() const {return scale;}
 
 void entity::setPos(const vd2d& p) {
 	pos = p;
@@ -32,7 +33,7 @@ void entity::setMargin(const int &m) {
 	margin = m;
 }
 
-entity::entity(const vd2d &pos, const vd2d &index, const vd2d &indexSize, const vd2d& dimensions, int margin) :pos(pos), index(index), dimensions(dimensions),  indexSize(indexSize), margin(margin) {
+entity::entity(const vd2d &pos, const vd2d &index, const vd2d &indexSize, const vd2d& dimensions, int margin, int scale) :pos(pos), index(index), dimensions(dimensions),  indexSize(indexSize), margin(margin), scale(scale) {
 
 }
 
@@ -47,15 +48,15 @@ void entity::walkRandom(){
 
 
 	if(direction == 1) {
-		pos.y -= 2;
+		pos.y -= .5;
 	}
 	if(direction == 2) {
-		pos.x += 2;
+		pos.x += .5;
 	}
 	if(direction == 3) {
-		pos.y += 2;
+		pos.y += .5;
 	}
 	if(direction == 4) {
-		pos.x -= 2;
+		pos.x -= .5;
 	}
 }

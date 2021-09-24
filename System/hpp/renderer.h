@@ -24,11 +24,13 @@ public:
 	bool set(SDL_Renderer* source);
 
 	void showFrames(const double& frames);
+	void showBlockStore(const vd2d& pos, const scene& cs, const vd2d& index);
 
 	SDL_Texture* loadTexture(const string& path);
 	void blit(SDL_Texture* texture, const vd2d& pos);
-	void blitBlock(SDL_Texture* texture, const vd2d& index, const vd2d& pos);
+	void blitBlock(SDL_Texture* texture, const entity& e);
 	void blitEntity(SDL_Texture* texture, const vd2d& index, const vd2d& pos, const vd2d& dimensions, vd2d indexSize = {128,128}, int margin = 64);
+
 	void blitGUI(const entity& gui, SDL_Texture* texture);
 	void renderGUI(const GUI& gui, SDL_Texture* texture);
 	/// idk about ALL of these

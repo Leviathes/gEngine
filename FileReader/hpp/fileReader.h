@@ -5,18 +5,21 @@
 #ifndef ADVENTUREGAME_FILEREADER_H
 #define ADVENTUREGAME_FILEREADER_H
 #include "../../System/hpp/common.h"
+#include <iostream>
 #include <fstream>
 #include <sstream>
 
 class fileReader {
 
 public:
-	std::ifstream vectorFile;
+	std::ifstream readStream;
+	std::ofstream writeStream;
 
 
-	void read();
+
+
 	vector<vector<vd2d>> vectorFill(const string& file);
-
+	void vectorWrite(const vector<vector<vd2d>>& blocks);
 
 };
 

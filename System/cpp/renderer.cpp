@@ -36,6 +36,25 @@ void renderer::showFrames(const double& frames) {
 
 }
 
+void renderer::showBlockStore(const vd2d &pos, const scene& cs, const vd2d& index) {
+	//renderEntity({ pos, {cs.blockStore}, {16,16}, {16,16}, {1}}, cs.mainAtlas.texture);
+
+	SDL_Rect target;
+
+
+	SDL_Rect clip = {(int)((index.x * 16) + (index.x)), (int)((index.y * 16) + (index.y)), 16, 16};
+
+	target.x = (int)pos.x;
+	target.y = (int)pos.y;
+
+	target.h = (int)(64);
+	target.w = (int)(64);
+
+	if(SDL_RenderCopy(Renderer, cs.mainAtlas.texture, &clip, &target) == -1) {
+		err("failed to render entity");
+	}
+}
+
 
 SDL_Texture* renderer::loadTexture(const string& path) {
 
@@ -62,16 +81,31 @@ void renderer::blit(SDL_Texture *texture, const vd2d& pos) {
 	SDL_RenderCopy(Renderer, texture, nullptr, &target);
 
 }
-
-void renderer::blitBlock(SDL_Texture* texture, const vd2d& index, const vd2d& pos) {
+void renderer::blitGUI(const entity& gui, SDL_Texture* texture) {
 
 	SDL_Rect target;
 
 
-	SDL_Rect clip = {(int)((index.x * (16)) + (index.x))  , (int)((index.y * (16)) + (index.y)),16,16};
+	SDL_Rect clip = {(int)((gui.getIndex().x * gui.getIndexSize().x) + (gui.getIndex().x * gui.getMargin())) , (int)((gui.getIndex().y * gui.getIndexSize().y) + (gui.getIndex().y * gui.getMargin())), (int)gui.getDimensions().x, (int)gui.getDimensions().y};
 
-	target.x = (int)pos.x;
-	target.y = (int)pos.y;
+	target.x = (int)(gui.getPos().x);
+	target.y = (int)(gui.getPos().y);
+	target.h = (int)gui.getDimensions().y*3*gui.getScale();
+	target.w = (int)gui.getDimensions().x*3*gui.getScale();
+
+	SDL_RenderCopy(Renderer, texture, &clip, &target);
+
+}
+
+void renderer::blitBlock(SDL_Texture* texture, const entity& e) {
+
+	SDL_Rect target;
+
+
+	SDL_Rect clip = {(int)((e.getIndex().x * (e.getIndexSize().x)) + (e.getIndex().x ))  , (int)((e.getIndex().y * (e.getIndexSize().y)) + (e.getIndex().y) ),(int)e.getDimensions().x,(int)e.getDimensions().y};
+
+	target.x = (int)((e.getPos().x - view.pos.x) * view.zoomFactor );
+	target.y = (int)((e.getPos().y + view.pos.y) * view.zoomFactor );
 
 	target.h = (int)(128*view.zoomFactor);
 	target.w = (int)(128*view.zoomFactor);
@@ -79,6 +113,8 @@ void renderer::blitBlock(SDL_Texture* texture, const vd2d& index, const vd2d& po
 	SDL_RenderCopy(Renderer, texture, &clip, &target);
 
 }
+
+
 
 void renderer::blitEntity(SDL_Texture* texture, const vd2d& index, const vd2d& pos, const vd2d& dimensions ,vd2d indexSize, int margin) {
 	SDL_Rect target;
@@ -88,8 +124,9 @@ void renderer::blitEntity(SDL_Texture* texture, const vd2d& index, const vd2d& p
 
 	target.x = (int)((pos.x - view.pos.x) * view.zoomFactor );
 	target.y = (int)((pos.y + view.pos.y) * view.zoomFactor );
-	target.h = (int)(3*dimensions.y*view.zoomFactor);
-	target.w = (int)(3*dimensions.x*view.zoomFactor);
+
+	target.h = (int)(4*dimensions.y*view.zoomFactor);
+	target.w = (int)(4*dimensions.x*view.zoomFactor);
 
 	if(SDL_RenderCopy(Renderer, texture, &clip, &target) == -1) {
 		err("failed to render entity");
@@ -99,21 +136,6 @@ void renderer::blitEntity(SDL_Texture* texture, const vd2d& index, const vd2d& p
 	}
 }
 
-void renderer::blitGUI(const entity& gui, SDL_Texture* texture) {
-
-	SDL_Rect target;
-
-
-SDL_Rect clip = {(int)((gui.getIndex().x * gui.getIndexSize().x) + (gui.getIndex().x * gui.getMargin())) , (int)((gui.getIndex().y * gui.getIndexSize().y) + (gui.getIndex().y * gui.getMargin())), (int)gui.getDimensions().x, (int)gui.getDimensions().y};
-
-target.x = (int)(gui.getPos().x);
-target.y = (int)(gui.getPos().y);
-target.h = (int)gui.getDimensions().y*3;
-target.w = (int)gui.getDimensions().x*3;
-
-SDL_RenderCopy(Renderer, texture, &clip, &target);
-
-}
 
 void renderer::renderGUI(const GUI& gui, SDL_Texture* texture) {
 	for(int i = 0; i < gui.widgets.size(); ++i) {
@@ -130,7 +152,10 @@ void renderer::renderEntity(const entity& entity, SDL_Texture* texture) {
 void renderer::renderScene(const scene& scene) {
 	for(int i = 0; i < scene.blocks.size(); ++i) {
 		for(int j = 0; j < scene.blocks[i].size(); ++j) {
-			blitBlock(scene.mainAtlas.texture, {scene.blocks[i][j]}, {(((double)j * 128) - view.pos.x) * view.zoomFactor , (((double)i * 128) + view.pos.y ) * view.zoomFactor   } );
+
+			blitBlock(scene.mainAtlas.texture, {{(double) ((j) * (128) ), (double) ((i) * (128) ) }, {scene.blocks[i][j]}, {16,16}, {16,16}, {1}});
+			//blitEntity(scene.mainAtlas.texture, {scene.blocks[i][j]}, {(((double)j * 16) (((double)i * 16) + view.pos.y ) * view.zoomFactor}, {16, 16}, {16,16}, {1});
+			//blitBlock(scene.mainAtlas.texture, {scene.blocks[i][j]}, {(((double)j * 128) - view.pos.x) * view.zoomFactor , (((double)i * 128) + view.pos.y ) * view.zoomFactor   } );
 		}
 	}
 
