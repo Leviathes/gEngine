@@ -8,11 +8,14 @@
 #include "../../System/hpp/engine.h"
 #include "../../System/hpp/textureAtlas.h"
 #include "player.h"
+#include "../Lumber.h"
 
 
-class engine;
+class engine1;
 
 class game : public engine {
+
+
 	SDL_Event* event;
 	scene* currentScene;
 	bool shiftModifier{false};
@@ -25,7 +28,7 @@ class game : public engine {
 
 public:
 player p1;
-
+Lumber::Logger log;
  double bsx{92};
  double bsy{600};
 

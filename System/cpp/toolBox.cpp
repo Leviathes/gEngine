@@ -41,6 +41,9 @@ namespace toolBox {
 		printHelp(deBug());
 	}
 
+
+
+
 	void printHelp(const std::string &helpCommand) {
 		if (helpCommand == run()) {
 			cout << runHelp;
